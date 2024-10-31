@@ -31,7 +31,7 @@ const templates =
           "subject": "Your Order Has Been Successfully Submitted",
           "heading": "Your Order Has Been Successfully Submitted",
           "body": [
-              { "type": "text", "content": "Hello {{userName}}," },
+              { "type": "text", "content": "Hello {{firstName}} {{lastName}}," },
               { "type": "text", "content": "Thank you for your order! We’re excited to let you know that your order has been successfully submitted and is now being processed." },
               { "type": "text", "content": "Order Details:" },
               { 
@@ -148,7 +148,7 @@ function getEmailContent(type, lang, userType, variables) {
 }
 
 const sendEmail = async (req) => {
-    const { email, type, lang, userType } = req.body;
+    const { email, type, lang, userType, firstName, lastName } = req.body;
 
     if (!filterList(email)) {
         console.error(`Email domain: ${email.split('@')[1]} not supported.`);
@@ -159,13 +159,19 @@ const sendEmail = async (req) => {
     const variables = {
         resetLink: "www.google.com",
         customerDetails: "John Doe, 630-555-5555",
-        requestLink: "www.compositesone.com"
+        requestLink: "www.compositesone.com",
+        accountCreationLink: "www.accountcreationlink.com",
+        orderNumber: "12345",
+        orderDate: "2023-01-01",
+        itemsSummary: "Sample item summary",
+        userAccountLink: "www.useraccountlink.com",
+        firstName: firstName || "DefaultFirstName", // Add firstName from request or default
+        lastName: lastName || "DefaultLastName"     // Add lastName from request or default
     };
 
     const { subject, heading, body } = getEmailContent(type, lang, userType, variables);
 
     const img = "https://www.mmsonline.com/cdn/showrooms/profile/images1/COMPOSITE%20ONE%20NEW.1644250970441.png";
-
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -188,12 +194,11 @@ const sendEmail = async (req) => {
                 <h1 style="font-size: 24px; color: #333; margin: 0 0 10px 0;">${heading}</h1>
                 
                 <div style="max-width: 600px; text-align: left;">
-                ${variables.firstName ? `<p>Dear ${variables.firstName} ${variables.lastName ? variables.lastName : ""}</p>` : ''}
                     ${body}
                 </div>
 
                 ${userType === 'customer' ? `
-                <div style="max-width: 600px; background-color: #f2f2f2; padding: 15px; text-align: center; margin-top: 20px;">
+                <div style="max-width: 600px; background-color: #f2f2f2; padding: 15px; text-align: center; margin-top: 20px; border-radius: 5px;">
                     <p style="color: #000; margin: 0;">
                         If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline; color: inherit;">support@compositesone.com</a>.
                     </p>
@@ -210,8 +215,8 @@ const sendEmail = async (req) => {
         console.error('Error sending email:', error);
         throw error;
     }
-    
 };
+
 
 
 
