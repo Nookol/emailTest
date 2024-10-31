@@ -173,7 +173,7 @@ const sendEmail = async (req) => {
                     </div>
                     
                     <div style="text-align: center; margin-top: 20px;">
-                        <p style="background-color: #f2f2f2; border-radius: 10px; padding: 5px 10px; display: inline-block; color: #000;">
+                        <p style="background-color: #f2f2f2; padding: 15px; display: inline-block; color: #000;">
                             If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline;">support@compositesone.com</a>.
                         </p>
                     </div>
