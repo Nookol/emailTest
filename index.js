@@ -132,7 +132,7 @@ const sendEmail = async (req) => {
         to: email,
         subject: subject,
         text: heading + "\n\n" + body.replace(/<[^>]*>?/gm, ""),
-        html: `<div style="display: flex; flex-direction: column">
+        html: `<div>
                 <img src="${img}" 
                     alt="Composites One Logo" 
                     style="width: 150px; height: auto; display: inline-block; margin-right: 10px; vertical-align: middle;">
