@@ -53,25 +53,25 @@ function replacePlaceholders(template, variables) {
 
 
 function renderContentBlocks(body, variables) {
-  return body
-      .map((block) => {
-          switch (block.type) {
-              case 'text':
-                  return `<p>${replacePlaceholders(block.content, variables)}</p>`;
-              case 'button':
-                  return `<a href="${replacePlaceholders(
-                      block.href,
-                      variables
-                  )}" style="padding: 10px; background-color: blue; color: white; text-decoration: none;">${
-                      block.text
-                  }</a>`;
-              case 'link':
-                  return `<a href="${replacePlaceholders(block.href, variables)}">${block.text}</a>`;
-              default:
-                  return '';
-          }
-      })
-      .join('');
+    return body
+        .map((block) => {
+            switch (block.type) {
+                case 'text':
+                    return `<p>${replacePlaceholders(block.content, variables)}</p>`;
+                case 'button':
+                    return `<a  href="${replacePlaceholders(
+                        block.href,
+                        variables
+                    )}" style=" text-align: center; max-width: 30%; padding: 10px; background-color: #0F4C8B; color: white; text-decoration: none;"">${
+                        block.text
+                    }</a>`;
+                case 'link':
+                    return `<a href="${replacePlaceholders(block.href, variables)}">${block.text}</a>`;
+                default:
+                    return '';
+            }
+        })
+        .join('');
 }
 
 function getEmailContent(type, lang, userType, variables) {
@@ -84,48 +84,59 @@ function getEmailContent(type, lang, userType, variables) {
 }
 
 const sendEmail = async (req) => {
-  const { email, type, lang, userType } = req.body;
+    const { email, type, lang, userType } = req.body;
 
-  console.info(`Email domain allowed: ${filterList(email)}`);
+    if (!filterList(email)) {
+        console.error(`Email domain: ${email.split('@')[1]} not supported.`);
+    }
 
-  const variables = {
-      resetLink: "www.google.com",
-      customerDetails: "John Doe, 630-555-5555",
-  };
+    console.log(`Email domain allowed: ${filterList(email)}`);
 
-  const { subject, heading, body } = getEmailContent(type, lang, userType, variables);
-  const user = process.env.USER;
-  const pass = process.env.PASS;
-  console.log("U ", user.length);
-  console.log("P ", pass.length)
+    const variables = {
+        resetLink: "www.google.com",
+        customerDetails: "John Doe, 630-555-5555",
+        requestLink: "www.compositesone.com"
+    };
 
-  const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-          user: user,
-          pass: pass
-      },
-  });
+    const { subject, heading, body } = getEmailContent(type, lang, userType, variables);
 
-  const mailOptions = {
-      from: 'thisisatestemailforsmtpcomp1@gmail.com',
-      to: email,
-      subject: subject,
-      text: heading + "\n\n" + body.replace(/<[^>]*>?/gm, ""),
-      html: `<h1>${heading}</h1>${body}`, 
-  };
+    const img = "https://www.mmsonline.com/cdn/showrooms/profile/images1/COMPOSITE%20ONE%20NEW.1644250970441.png";
 
-  try {
-      console.info('Attempting to send message...');
-      const info = await transporter.sendMail(mailOptions);
-      console.info('Email sent successfully:', info.response);
-      return info;
-  } catch (error) {
-      console.error('Error sending email:', error);
-      throw error;
-  }
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'thisisatestemailforsmtpcomp1@gmail.com',
+            pass: 'kwce rppd wrod jjfj',
+        },
+    });
+
+    const mailOptions = {
+        from: 'thisisatestemailforsmtpcomp1@gmail.com',
+        to: email,
+        subject: subject,
+        text: heading + "\n\n" + body.replace(/<[^>]*>?/gm, ""),
+        html: `<div style="display: flex; flex-direction: column">
+                <img src="${img}" 
+                    alt="Composites One Logo" 
+                    style="width: 150px; height: auto; display: inline-block; margin-right: 10px; vertical-align: middle;">
+                <h1>${heading}</h1>
+                ${body}
+              </div>`
+    };
+
+    try {
+        console.log('Attempting to send message...');
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully:', info.response);
+        return info;
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error;
+    }
+    
 };
 
 
