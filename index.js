@@ -1,6 +1,5 @@
 import express, { json } from 'express';
 import nodemailer from 'nodemailer';
-import { sendEmail } from './email/smpt';
 
 const templates =
 {
