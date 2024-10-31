@@ -65,14 +65,17 @@ export const sendEmail = async (req) => {
 
   const template = getTemplate(lang, userType, type);
   const emailHtml = getEmailHtml(template, email);
+  const user = process.env.USER;
+  const pass = process.env.PASS;
+
 
   const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
       secure: false,
       auth: {
-          user: "thisisatestemailforsmtpcomp1@gmail.com",
-          pass: "kwce rppd wrod jjfj",
+          user: user,
+          pass: pass,
       },
   });
   
