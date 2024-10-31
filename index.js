@@ -16,16 +16,36 @@ const templates =
             { "type": "text", "content": "If you didn’t request a password reset, you can safely ignore this email." }
           ]
         },
-        "account-creation": {
-                "subject": "Become a Composites One Customer",
-                "heading": "Become a Composites One Customer",
-                "body": [
-                    { "type": "text", "content": "We received your request to become a Composites One Customer. Please continue the process by clicking the button below:" },
-                    { "type": "button", "text": "Complete Account Creation", "href": "{{accountCreationLink}}" },
-                    { "type": "text", "content": "Alternatively, try this link:" },
-                    { "type": "link", "text": "{{accountCreationLink}}", "href": "{{accountCreationLink}}" }
-                ]
-            }
+        "create-account": {
+          "subject": "Create a Composites One account",
+          "heading": "Create a Composites One account",
+          "body": [
+              { "type": "text", "content": "Dear {{firstName}} {{lastName}}," },
+              { "type": "text", "content": "We received your request to create an account. Please continue the process by clicking the button below:" },
+              { "type": "button", "text": "Complete Account Creation", "href": "{{accountCreationLink}}" },
+              { "type": "text", "content": "Alternatively, try this link:" },
+              { "type": "link", "text": "{{accountCreationLink}}", "href": "{{accountCreationLink}}" }
+          ]
+        },
+        "order-confirmation": {
+          "subject": "Your Order Has Been Successfully Submitted",
+          "heading": "Your Order Has Been Successfully Submitted",
+          "body": [
+              { "type": "text", "content": "Hello {{userName}}," },
+              { "type": "text", "content": "Thank you for your order! We’re excited to let you know that your order has been successfully submitted and is now being processed." },
+              { "type": "text", "content": "Order Details:" },
+              { 
+                  "type": "list",
+                  "items": [
+                      { "label": "Order Number", "value": "{{orderNumber}}" },
+                      { "label": "Order Date", "value": "{{orderDate}}" },
+                      { "label": "Items Ordered", "value": "{{itemsSummary}}" }
+                  ]
+              },
+              { "type": "text", "content": "You will receive another notification once your order has been shipped. In the meantime, if you have any questions or need to make changes, please contact our support team." },
+              { "type": "text", "content": "Thank you for choosing Composites One. We appreciate your business!" }
+          ]
+      }
       },
       "csr": {
         "add-location": {
@@ -41,6 +61,7 @@ const templates =
       }
     }
   }
+  
   
 
 const filterList = (domain) => {
@@ -73,14 +94,24 @@ function renderContentBlocks(body, variables) {
                 case 'text':
                     return `<p>${replacePlaceholders(block.content, variables)}</p>`;
                 case 'button':
-                    return `<a  href="${replacePlaceholders(
+                    return `<a href="${replacePlaceholders(
                         block.href,
                         variables
-                    )}" style=" text-align: center; max-width: 30%; padding: 10px; background-color: #0F4C8B; color: white; text-decoration: none;"">${
+                    )}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; border-radius: 5px;">${
                         block.text
                     }</a>`;
                 case 'link':
                     return `<a href="${replacePlaceholders(block.href, variables)}">${block.text}</a>`;
+                case 'list':
+                    return `
+                        <ul style="list-style-type: none; padding: 0;">
+                            ${block.items
+                                .map(
+                                    item => `<li><strong>${item.label}:</strong> ${replacePlaceholders(item.value, variables)}</li>`
+                                )
+                                .join('')}
+                        </ul>
+                    `;
                 default:
                     return '';
             }
@@ -132,13 +163,20 @@ const sendEmail = async (req) => {
         to: email,
         subject: subject,
         text: heading + "\n\n" + body.replace(/<[^>]*>?/gm, ""),
-        html: `<div>
+        html:  `<div>
                 <img src="${img}" 
                     alt="Composites One Logo" 
                     style="width: 150px; height: auto; display: inline-block; margin-right: 10px; vertical-align: middle;">
                 <h1>${heading}</h1>
                 ${body}
-              </div>`
+                <div style="text-align: center;">
+                    <small
+                        style="background-color: grey; border-radius: 10px; padding: 5px 10px; display: inline-block; color: white;"
+                    >
+                        If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="color: #ffffff; text-decoration: underline;">support@compositesone.com</a>.
+                    </small>
+                </div>
+              </div>`;
     };
 
     try {
