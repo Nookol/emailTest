@@ -83,8 +83,8 @@ export const sendEmail = async (req) => {
       from: "thisisatestemailforsmtpcomp1@gmail.com",
       to: email,
       subject: template.subject,
-      text: template.body,
-      html: emailHtml,
+      text: String(template.body),
+      html: String(emailHtml),  
   };
 
   try {
