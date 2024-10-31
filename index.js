@@ -163,20 +163,21 @@ const sendEmail = async (req) => {
         to: email,
         subject: subject,
         text: heading + "\n\n" + body.replace(/<[^>]*>?/gm, ""),
-        html:  `<div style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">
-                <div style="width: 150px; height: auto; background-image: url('${img}'); background-size: contain; background-repeat: no-repeat; margin: 0 auto;"></div>
-                <h1 style="font-size: 24px; color: #333; margin-bottom: 20px;">${heading}</h1>
-                <div style="text-align: left; max-width: 600px; margin: 0 auto;">
-                    ${body}
-                </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <p
-                        style="background-color: #f2f2f2; border-radius: 10px; padding: 5px 10px; display: inline-block; color:#000"
-                    >
-                        If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline;">support@compositesone.com</a>.
-                    </p>
-                </div>
-            </div>`
+        html:  `<div style="padding: 20px; font-family: Arial, sans-serif; text-align: left;">
+                    <div style="width: 150px; height: 80px; background-image: url('${img}'); background-size: contain; background-repeat: no-repeat; background-position: left; margin-bottom: 20px;"></div>
+                    
+                    <h1 style="font-size: 24px; color: #333; margin-bottom: 20px;">${heading}</h1>
+                    
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        ${body}
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p style="background-color: #f2f2f2; border-radius: 10px; padding: 5px 10px; display: inline-block; color: #000;">
+                            If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline;">support@compositesone.com</a>.
+                        </p>
+                    </div>
+                </div>`
     };
 
     try {
