@@ -176,7 +176,7 @@ const sendEmail = async (req) => {
                         If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="color: #ffffff; text-decoration: underline;">support@compositesone.com</a>.
                     </small>
                 </div>
-              </div>`;
+              </div>`
     };
 
     try {
