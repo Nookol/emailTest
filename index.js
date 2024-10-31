@@ -116,7 +116,7 @@ function renderContentBlocks(body, variables) {
                     return `<a href="${replacePlaceholders(
                         block.href,
                         variables
-                    )}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; border-radius: 5px;">${
+                    )}" style="background-color: #104c8c; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; border-radius: 5px;">${
                         block.text
                     }</a>`;
                 case 'link':
@@ -193,7 +193,7 @@ const sendEmail = async (req) => {
 
                 
                 <div style="text-align: center; margin-top: 20px;">
-                    <p style="background-color: #f2f2f2; padding: 10px 15px; display: inline-block; color: #000; border-radius: 5px;">
+                    <p style="background-color: #f2f2f2; padding: 30x; display: inline-block; color: #000; border-radius: 5px;">
                         If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline;">support@compositesone.com</a>.
                     </p>
                 </div>
