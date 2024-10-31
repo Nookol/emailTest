@@ -35,10 +35,22 @@ const filterList = (domain) => {
 };
 
 function replacePlaceholders(template, variables) {
-  return template.replace(/\{\{(.*?)\}\}/g, (match, variableName) => {
-      return variables[variableName.trim()] || match;
-  });
+    if (typeof template === 'string') {
+        return template.replace(/\{\{(.*?)\}\}/g, (match, variableName) => {
+            return variables[variableName.trim()] || match;
+        });
+    } else if (Array.isArray(template)) {
+        return template.map(item => replacePlaceholders(item, variables));
+    } else if (typeof template === 'object' && template !== null) {
+        const result = {};
+        for (const key in template) {
+            result[key] = replacePlaceholders(template[key], variables);
+        }
+        return result;
+    }
+    return template;
 }
+
 
 function renderContentBlocks(body, variables) {
   return body
