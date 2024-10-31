@@ -84,10 +84,9 @@ function getEmailContent(type, lang, userType, variables) {
 }
 
 const sendEmail = async (req) => {
-  const logger = initLogger();
   const { email, type, lang, userType } = req.body;
 
-  logger.info(`Email domain allowed: ${filterList(email)}`);
+  console.info(`Email domain allowed: ${filterList(email)}`);
 
   const variables = {
       resetLink: "www.google.com",
@@ -119,12 +118,12 @@ const sendEmail = async (req) => {
   };
 
   try {
-      logger.info('Attempting to send message...');
+      console.info('Attempting to send message...');
       const info = await transporter.sendMail(mailOptions);
-      logger.info('Email sent successfully:', info.response);
+      console.info('Email sent successfully:', info.response);
       return info;
   } catch (error) {
-      logger.error('Error sending email:', error);
+      console.error('Error sending email:', error);
       throw error;
   }
 };
