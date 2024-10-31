@@ -156,13 +156,16 @@ const sendEmail = async (req) => {
 
     console.log(`Email domain allowed: ${filterList(email)}`);
 
+    const firstName = 'Nick';
+    const lastName = 'Albert';
+    
     const variables = {
         resetLink: "www.google.com",
         customerDetails: "John Doe, 630-555-5555",
         requestLink: "www.compositesone.com",
-        accountCreationLink: "www.accountcreationlink.com",
-        orderNumber: "12345",
-        orderDate: "2023-01-01",
+        accountCreationLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        orderNumber: "UmmmBLAH123",
+        orderDate: "2024-10-31",
         itemsSummary: "Sample item summary",
         userAccountLink: "www.useraccountlink.com",
         firstName: firstName || "DefaultFirstName", // Add firstName from request or default
