@@ -250,13 +250,13 @@ const sendEmail = async (req) => {
     const img = "https://www.mmsonline.com/cdn/showrooms/profile/images1/COMPOSITE%20ONE%20NEW.1644250970441.png";
 
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
+        host: 'synergy55-com.mail.protection.outlook.com',
+        port: 25,
         secure: false,
-        auth: {
-            user: 'thisisatestemailforsmtpcomp1@gmail.com',
-            pass: 'kwce rppd wrod jjfj',
-        },
+        // auth: {
+        //     user: 'thisisatestemailforsmtpcomp1@gmail.com',
+        //     pass: 'kwce rppd wrod jjfj',
+        // },
     });
 
     const mailOptions = {
