@@ -67,6 +67,8 @@ export const sendEmail = async (req) => {
   const emailHtml = getEmailHtml(template, email);
   const user = process.env.USER;
   const pass = process.env.PASS;
+  console.log("U ", user.length);
+  console.log("P ", pass.length)
 
 
   const transporter = nodemailer.createTransport({
