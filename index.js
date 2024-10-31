@@ -3,31 +3,45 @@ import nodemailer from 'nodemailer';
 
 const templates =
 {
-  "en-us": {
-    "customer": {
-      "reset-password": {
-        "subject": "Reset Password Request",
-        "heading": "Password Reset",
-        "body": [
-          { "type": "text", "content": "We received a request to reset your password." },
-          { "type": "text", "content": "Please click the button below to sign in to your account." },
-          { "type": "button", "text": "Reset Password", "href": "{{resetLink}}" },
-          { "type": "text", "content": "If you didn’t request a password reset, you can safely ignore this email." }
-        ]
-      }
-    },
-    "csr": {
-      "add-location": {
-        "heading": "Action Required: User Location Addition Request",
-        "body": [
-          { "type": "text", "content": "A new request has been submitted to add a location." },
-          { "type": "text", "content": "{{customerDetails}}" },
-          { "type": "link", "text": "Review the request", "href": "{{reviewLink}}" }
-        ]
+    "en-us": {
+      "customer": {
+        "reset-password": {
+          "subject": "Reset Password Request",
+          "heading": "Password Reset",
+          "template": "t1",
+          "body": [
+            { "type": "text", "content": "We received a request to reset your password." },
+            { "type": "text", "content": "Please click the button below to sign in to your account." },
+            { "type": "button", "text": "Reset Password", "href": "{{resetLink}}" },
+            { "type": "text", "content": "If you didn’t request a password reset, you can safely ignore this email." }
+          ]
+        },
+        "account-creation": {
+                "subject": "Become a Composites One Customer",
+                "heading": "Become a Composites One Customer",
+                "body": [
+                    { "type": "text", "content": "We received your request to become a Composites One Customer. Please continue the process by clicking the button below:" },
+                    { "type": "button", "text": "Complete Account Creation", "href": "{{accountCreationLink}}" },
+                    { "type": "text", "content": "Alternatively, try this link:" },
+                    { "type": "link", "text": "{{accountCreationLink}}", "href": "{{accountCreationLink}}" }
+                ]
+            }
+      },
+      "csr": {
+        "add-location": {
+          "heading": "Action Required: User Location Addition Request",
+          "template": "t1",
+          "body": [
+            { "type": "text", "content": "A new request has been submitted to add a location." },
+            { "type": "text", "content": "{{customerDetails}}" },
+            { "type": "link", "text": "Review the request", "href": "{{reviewLink}}" },
+            { "type": "button", "text": "Review Request", "href": "{{requestLink}}" }
+          ]
+        }
       }
     }
   }
-}
+  
 
 const filterList = (domain) => {
   const domains = ['nviz.com', 'synergy55.com', 'compositesone.com', 'gmail.com'];
