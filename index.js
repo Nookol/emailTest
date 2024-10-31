@@ -78,7 +78,83 @@ const templates =
                 ]
             }
       }
+    },
+    "es-mx": {
+    "customer": {
+      "reset-password": {
+        "subject": "Solicitud de Restablecimiento de Contraseña",
+        "heading": "Restablecimiento de Contraseña",
+        "template": "t1",
+        "body": [
+          { "type": "text", "content": "Hemos recibido una solicitud para restablecer tu contraseña." },
+          { "type": "text", "content": "Haz clic en el botón de abajo para iniciar sesión en tu cuenta." },
+          { "type": "button", "text": "Restablecer Contraseña", "href": "{{resetLink}}" },
+          { "type": "text", "content": "Si no solicitaste un restablecimiento de contraseña, puedes ignorar este correo." }
+        ]
+      },
+      "create-account": {
+        "subject": "Crea una cuenta en Composites One",
+        "heading": "Crea una cuenta en Composites One",
+        "body": [
+          { "type": "text", "content": "Estimado/a {{firstName}} {{lastName}}," },
+          { "type": "text", "content": "Hemos recibido tu solicitud para crear una cuenta. Por favor, continúa el proceso haciendo clic en el botón de abajo:" },
+          { "type": "button", "text": "Completar Creación de Cuenta", "href": "{{accountCreationLink}}" },
+          { "type": "text", "content": "Alternativamente, intenta con este enlace:" },
+          { "type": "link", "text": "{{accountCreationLink}}", "href": "{{accountCreationLink}}" }
+        ]
+      },
+      "order-confirmation": {
+        "subject": "Tu Pedido ha Sido Enviado Exitosamente",
+        "heading": "Tu Pedido ha Sido Enviado Exitosamente",
+        "body": [
+          { "type": "text", "content": "Hola {{firstName}} {{lastName}}," },
+          { "type": "text", "content": "¡Gracias por tu pedido! Nos complace informarte que tu pedido ha sido enviado exitosamente y ahora está siendo procesado." },
+          { "type": "text", "content": "Detalles del Pedido:" },
+          {
+            "type": "list",
+            "items": [
+              { "label": "Número de Pedido", "value": "{{orderNumber}}" },
+              { "label": "Fecha del Pedido", "value": "{{orderDate}}" },
+              { "label": "Artículos Pedidos", "value": "{{itemsSummary}}" }
+            ]
+          },
+          { "type": "text", "content": "Recibirás otra notificación una vez que tu pedido haya sido enviado. Mientras tanto, si tienes preguntas o necesitas hacer cambios, por favor contacta a nuestro equipo de soporte." },
+          { "type": "text", "content": "¡Gracias por elegir Composites One! Apreciamos tu preferencia." }
+        ]
+      }
+    },
+    "csr": {
+      "add-location": {
+        "heading": "Acción Requerida: Solicitud de Adición de Ubicación de Usuario",
+        "template": "t1",
+        "body": [
+          { "type": "text", "content": "Se ha recibido una nueva solicitud para añadir una ubicación." },
+          { "type": "text", "content": "{{customerDetails}}" },
+          { "type": "link", "text": "Revisar la solicitud", "href": "{{reviewLink}}" },
+          { "type": "button", "text": "Revisar Solicitud", "href": "{{requestLink}}" }
+        ]
+      },
+      "user-login-assistance": {
+        "subject": "Acción Requerida: Asistencia de Inicio de Sesión del Usuario Necesaria",
+        "heading": "Acción Requerida: Asistencia de Inicio de Sesión del Usuario Necesaria",
+        "body": [
+          { "type": "text", "content": "Un usuario ha intentado iniciar sesión varias veces con credenciales incorrectas y ha sido bloqueado temporalmente de su cuenta. Por favor, contacta al usuario para ayudarle a resolver el problema." },
+          { "type": "text", "content": "Detalles del Usuario:" },
+          {
+            "type": "list",
+            "items": [
+              { "label": "Nombre de Usuario", "value": "{{userName}}" },
+              { "label": "ID de Cuenta", "value": "{{accountId}}" },
+              { "label": "Correo Electrónico", "value": "{{userEmail}}" },
+              { "label": "Razón del Bloqueo", "value": "Demasiados intentos fallidos de inicio de sesión" }
+            ]
+          },
+          { "type": "text", "content": "Para ver la cuenta y asistir al usuario, haz clic en el enlace de abajo:" },
+          { "type": "button", "text": "Ver Cuenta de Usuario", "href": "{{userAccountLink}}" }
+        ]
+      }
     }
+  }
   }
   
   
