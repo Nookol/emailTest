@@ -188,6 +188,7 @@ const sendEmail = async (req) => {
                 <h1 style="font-size: 24px; color: #333; margin: 0 0 10px 0;">${heading}</h1>
                 
                 <div style="max-width: 600px; text-align: left;">
+                ${variables.firstName ? `<p>Dear ${variables.firstName} ${variables.lastName ? variables.lastName : ""}</p>` : ''}
                     ${body}
                 </div>
 
