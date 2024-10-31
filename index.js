@@ -57,7 +57,26 @@ const templates =
             { "type": "link", "text": "Review the request", "href": "{{reviewLink}}" },
             { "type": "button", "text": "Review Request", "href": "{{requestLink}}" }
           ]
-        }
+        },
+          "user-login-assistance": {
+                "subject": "Action Required: User Login Assistance Needed",
+                "heading": "Action Required: User Login Assistance Needed",
+                "body": [
+                    { "type": "text", "content": "A user has attempted to log in multiple times with incorrect credentials and has been temporarily locked out of their account. Please contact the user to assist with resolving the issue." },
+                    { "type": "text", "content": "User Details:" },
+                    { 
+                        "type": "list",
+                        "items": [
+                            { "label": "User Name", "value": "{{userName}}" },
+                            { "label": "Account ID", "value": "{{accountId}}" },
+                            { "label": "Email", "value": "{{userEmail}}" },
+                            { "label": "Lockout Reason", "value": "Too many failed login attempts" }
+                        ]
+                    },
+                    { "type": "text", "content": "To view the account and assist the user, please click the link below:" },
+                    { "type": "button", "text": "View User Account", "href": "{{userAccountLink}}" }
+                ]
+            }
       }
     }
   }
@@ -163,21 +182,22 @@ const sendEmail = async (req) => {
         to: email,
         subject: subject,
         text: heading + "\n\n" + body.replace(/<[^>]*>?/gm, ""),
-        html:  `<div style="padding: 20px; font-family: Arial, sans-serif; text-align: left;">
-                    <div style="width: 150px; height: 80px; background-image: url('${img}'); background-size: contain; background-repeat: no-repeat; background-position: left; margin-bottom: 20px;"></div>
-                    
-                    <h1 style="font-size: 24px; color: #333; margin-bottom: 20px;">${heading}</h1>
-                    
-                    <div style="max-width: 600px; margin: 0 auto;">
-                        ${body}
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 20px;">
-                        <p style="background-color: #f2f2f2; padding: 15px; display: inline-block; color: #000;">
-                            If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline;">support@compositesone.com</a>.
-                        </p>
-                    </div>
-                </div>`
+        html: `<div style="padding: 20px; font-family: Arial, sans-serif; text-align: left;">
+                <div style="width: 150px; height: 80px; background-image: url('${img}'); background-size: contain; background-repeat: no-repeat; background-position: left; margin-bottom: 10px;"></div>
+                
+                <h1 style="font-size: 24px; color: #333; margin: 0 0 10px 0;">${heading}</h1>
+                
+                <div style="max-width: 600px; text-align: left;">
+                    ${body}
+                </div>
+
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="background-color: #f2f2f2; padding: 10px 15px; display: inline-block; color: #000; border-radius: 5px;">
+                        If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline;">support@compositesone.com</a>.
+                    </p>
+                </div>
+            </div>`
     };
 
     try {
