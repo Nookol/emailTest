@@ -236,7 +236,7 @@ const sendEmail = async (req) => {
         resetLink: "www.google.com",
         customerDetails: "John Doe, 630-555-5555",
         requestLink: "www.compositesone.com",
-        accountCreationLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        accountCreationLink: "",
         orderNumber: "UmmmBLAH123",
         orderDate: "2024-10-31",
         itemsSummary: "Sample item summary",
@@ -250,7 +250,7 @@ const sendEmail = async (req) => {
     const img = "https://www.mmsonline.com/cdn/showrooms/profile/images1/COMPOSITE%20ONE%20NEW.1644250970441.png";
 
     const transporter = nodemailer.createTransport({
-        host: 'synergy55-com.mail.protection.outlook.com',
+        host: 'smtp.gmail.com',
         port: 25,
         secure: false,
         // auth: {
