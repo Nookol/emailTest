@@ -253,10 +253,10 @@ const sendEmail = async (req) => {
         host: 'smtp.gmail.com',
         port: 25,
         secure: false,
-        // auth: {
-        //     user: 'thisisatestemailforsmtpcomp1@gmail.com',
-        //     pass: 'kwce rppd wrod jjfj',
-        // },
+        auth: {
+            user: 'thisisatestemailforsmtpcomp1@gmail.com',
+            pass: 'kwce rppd wrod jjfj',
+        },
     });
 
     const mailOptions = {
