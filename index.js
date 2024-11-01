@@ -274,7 +274,7 @@ const sendEmail = async (req) => {
                 </div>
 
                 ${userType === 'customer' ? `
-                <div style="max-width: 600px; background-color: #f2f2f2; padding: 15px; text-align: center; margin-top: 20px; border-radius: 5px;">
+                <div style="max-width: 600px; background-color: #f2f2f2; padding: 15px; text-align: center; margin-top: 20px;">
                     <p style="color: #000; margin: 0;">
                         If you have any additional questions, please email <a href="mailto:support@compositesone.com" style="text-decoration: underline; color: inherit;">support@compositesone.com</a>.
                     </p>
